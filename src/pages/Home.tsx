@@ -5,20 +5,12 @@ import heroImage from "@/assets/hero-diet-image.jpg";
 
 const dietPlans = [
   {
-    id: "ketogenic",
-    title: "Ketogenic Diet",
-    description: "High-fat, low-carb diet that puts your body into ketosis for rapid fat burning and mental clarity.",
-    benefits: ["Rapid Weight Loss", "Mental Clarity", "Stable Energy"],
-    calories: "1200-1800 calories",
+    id: "balanced",
+    title: "Balanced Global Diet",
+    description: "Well-rounded nutrition with all food groups adapted to your regional preferences for sustainable lifestyle.",
+    benefits: ["Sustainable", "All Nutrients", "Culturally Appropriate"],
+    calories: "1500-2200 calories",
     imageUrl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop"
-  },
-  {
-    id: "vegan",
-    title: "Vegan Diet",
-    description: "Plant-based nutrition that's rich in fiber, vitamins, and minerals while being environmentally friendly.",
-    benefits: ["Heart Health", "Lower Cholesterol", "Environmental Impact"],
-    calories: "1400-2000 calories",
-    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop"
   },
   {
     id: "mediterranean",
@@ -29,28 +21,36 @@ const dietPlans = [
     imageUrl: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=600&fit=crop"
   },
   {
+    id: "south_asia",
+    title: "South Asian Wellness",
+    description: "Ayurvedic principles with traditional spices, lentils, and vegetables for optimal health and digestion.",
+    benefits: ["Digestive Health", "Anti-Inflammatory", "Traditional Wisdom"],
+    calories: "1400-2000 calories",
+    imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&h=600&fit=crop"
+  },
+  {
+    id: "east_asia",
+    title: "East Asian Balance",
+    description: "Traditional Chinese and Japanese nutrition focusing on balance, fresh ingredients, and longevity.",
+    benefits: ["Longevity", "Heart Health", "Balanced Energy"],
+    calories: "1300-1900 calories",
+    imageUrl: "https://images.unsplash.com/photo-1553621042-f6e147245754?w=800&h=600&fit=crop"
+  },
+  {
+    id: "plant_based",
+    title: "Global Plant-Based",
+    description: "Plant-focused nutrition incorporating diverse cuisines from around the world for optimal health.",
+    benefits: ["Heart Health", "Environmental Impact", "Global Flavors"],
+    calories: "1400-2000 calories",
+    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop"
+  },
+  {
     id: "high_protein",
-    title: "High Protein Diet",
-    description: "Protein-rich meals designed to build muscle, increase metabolism, and maintain satiety.",
-    benefits: ["Muscle Building", "Higher Metabolism", "Sustained Fullness"],
+    title: "International High Protein",
+    description: "Protein-rich meals from various cultures designed for muscle building and sustained energy.",
+    benefits: ["Muscle Building", "Higher Metabolism", "Cultural Variety"],
     calories: "1600-2400 calories",
     imageUrl: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&h=600&fit=crop"
-  },
-  {
-    id: "paleo",
-    title: "Paleo Diet",
-    description: "Whole foods approach based on what our ancestors ate - no processed foods, grains, or dairy.",
-    benefits: ["Natural Foods", "Better Digestion", "Stable Blood Sugar"],
-    calories: "1400-2100 calories",
-    imageUrl: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=800&h=600&fit=crop"
-  },
-  {
-    id: "balanced",
-    title: "Balanced Diet",
-    description: "Well-rounded nutrition with all food groups in healthy proportions for sustainable lifestyle.",
-    benefits: ["Sustainable", "All Nutrients", "Flexible"],
-    calories: "1500-2200 calories",
-    imageUrl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop"
   }
 ];
 

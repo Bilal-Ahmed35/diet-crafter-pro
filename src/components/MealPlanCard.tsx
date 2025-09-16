@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Clock, Users, Utensils } from "lucide-react";
+import { Clock, Users, Printer } from "lucide-react";
 
 interface Recipe {
   id: number;
@@ -31,7 +31,7 @@ interface MealPlanCardProps {
     snack?: Recipe;
   };
   onViewRecipe: (recipe: Recipe) => void;
-  onSelectPlan: () => void;
+  onPrintPlan: () => void;
 }
 
 export const MealPlanCard = ({ 
@@ -40,7 +40,7 @@ export const MealPlanCard = ({
   macros, 
   meals, 
   onViewRecipe,
-  onSelectPlan 
+  onPrintPlan 
 }: MealPlanCardProps) => {
   const renderMeal = (meal: Recipe, mealType: string) => (
     <div key={meal.id} className="space-y-3">
@@ -129,9 +129,9 @@ export const MealPlanCard = ({
         )}
 
         <div className="pt-4">
-          <Button onClick={onSelectPlan} className="w-full" size="lg">
-            <Utensils className="h-4 w-4 mr-2" />
-            Choose This Plan
+          <Button onClick={onPrintPlan} className="w-full" size="lg">
+            <Printer className="h-4 w-4 mr-2" />
+            Print This Plan
           </Button>
         </div>
       </CardContent>

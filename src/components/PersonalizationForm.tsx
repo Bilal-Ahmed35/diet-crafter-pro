@@ -20,8 +20,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 const formSchema = z.object({
   age: z.string().min(1, "Age is required"),
   gender: z.string().min(1, "Gender is required"),
+  heightUnit: z.string().min(1, "Height unit is required"),
   height: z.string().min(1, "Height is required"),
+  heightFeet: z.string().optional(),
+  heightInches: z.string().optional(),
   weight: z.string().min(1, "Weight is required"),
+  region: z.string().min(1, "Region is required"),
   activityLevel: z.string().min(1, "Activity level is required"),
   fitnessGoal: z.string().min(1, "Fitness goal is required"),
   dietType: z.string().min(1, "Diet type is required"),
@@ -41,14 +45,20 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
     defaultValues: {
       age: "",
       gender: "",
+      heightUnit: "cm",
       height: "",
+      heightFeet: "",
+      heightInches: "",
       weight: "",
+      region: "",
       activityLevel: "",
       fitnessGoal: "",
       dietType: selectedDietType || "",
       allergies: "",
     },
   });
+
+  const heightUnit = form.watch("heightUnit");
 
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg border-0">
@@ -109,20 +119,82 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 />
               </div>
 
+              {/* Height Unit Selection */}
+              <FormField
+                control={form.control}
+                name="heightUnit"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Height Unit</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-row space-x-6"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="cm" id="cm" />
+                          <label htmlFor="cm">Centimeters (cm)</label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="ft" id="ft" />
+                          <label htmlFor="ft">Feet & Inches</label>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="height"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Height (cm)</FormLabel>
-                      <FormControl>
-                        <Input placeholder="170" type="number" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {heightUnit === "cm" ? (
+                  <FormField
+                    control={form.control}
+                    name="height"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Height (cm)</FormLabel>
+                        <FormControl>
+                          <Input placeholder="170" type="number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ) : (
+                  <div className="space-y-4">
+                    <FormLabel>Height (Feet & Inches)</FormLabel>
+                    <div className="grid grid-cols-2 gap-2">
+                      <FormField
+                        control={form.control}
+                        name="heightFeet"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input placeholder="5" type="number" {...field} />
+                            </FormControl>
+                            <div className="text-xs text-muted-foreground text-center">Feet</div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="heightInches"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input placeholder="8" type="number" {...field} />
+                            </FormControl>
+                            <div className="text-xs text-muted-foreground text-center">Inches</div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <FormField
                   control={form.control}
@@ -138,6 +210,41 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                   )}
                 />
               </div>
+            </div>
+
+            {/* Region */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground">Regional Preferences</h3>
+              
+              <FormField
+                control={form.control}
+                name="region"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Your Region/Cuisine Preference</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your region for culturally appropriate meals" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="north_america">North America</SelectItem>
+                        <SelectItem value="latin_america">Latin America</SelectItem>
+                        <SelectItem value="europe">Europe</SelectItem>
+                        <SelectItem value="middle_east">Middle East & North Africa</SelectItem>
+                        <SelectItem value="south_asia">South Asia (Indian Subcontinent)</SelectItem>
+                        <SelectItem value="east_asia">East Asia (Chinese, Japanese, Korean)</SelectItem>
+                        <SelectItem value="southeast_asia">Southeast Asia (Thai, Vietnamese, etc.)</SelectItem>
+                        <SelectItem value="sub_saharan_africa">Sub-Saharan Africa</SelectItem>
+                        <SelectItem value="australia_oceania">Australia & Oceania</SelectItem>
+                        <SelectItem value="international">International Mix</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
             {/* Activity & Goals */}
@@ -219,6 +326,18 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                         <SelectItem value="mediterranean">Mediterranean</SelectItem>
                         <SelectItem value="high_protein">High Protein</SelectItem>
                         <SelectItem value="low_carb">Low Carb</SelectItem>
+                        <SelectItem value="dash">DASH (Heart Health)</SelectItem>
+                        <SelectItem value="whole30">Whole30</SelectItem>
+                        <SelectItem value="intermittent_fasting">Intermittent Fasting</SelectItem>
+                        <SelectItem value="ayurvedic">Ayurvedic</SelectItem>
+                        <SelectItem value="traditional_chinese">Traditional Chinese Medicine</SelectItem>
+                        <SelectItem value="okinawan">Okinawan (Japanese Longevity)</SelectItem>
+                        <SelectItem value="nordic">Nordic Diet</SelectItem>
+                        <SelectItem value="flexitarian">Flexitarian</SelectItem>
+                        <SelectItem value="pescatarian">Pescatarian</SelectItem>
+                        <SelectItem value="macrobiotic">Macrobiotic</SelectItem>
+                        <SelectItem value="anti_inflammatory">Anti-Inflammatory</SelectItem>
+                        <SelectItem value="gluten_free">Gluten-Free</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
