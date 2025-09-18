@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import {
   Form,
   FormControl,
@@ -69,12 +70,15 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="p-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Basic Info */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">Basic Information</h3>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            {/* Basic Info Section */}
+            <div className="space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">1</div>
+                <h3 className="text-xl font-semibold text-foreground">Basic Information</h3>
+              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
@@ -212,9 +216,14 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
               </div>
             </div>
 
-            {/* Region */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">Regional Preferences</h3>
+            <Separator className="my-8" />
+
+            {/* Regional Preferences Section */}
+            <div className="space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">2</div>
+                <h3 className="text-xl font-semibold text-foreground">Regional Preferences</h3>
+              </div>
               
               <FormField
                 control={form.control}
@@ -247,9 +256,14 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
               />
             </div>
 
-            {/* Activity & Goals */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">Activity & Goals</h3>
+            <Separator className="my-8" />
+
+            {/* Activity & Goals Section */}
+            <div className="space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">3</div>
+                <h3 className="text-xl font-semibold text-foreground">Activity & Goals</h3>
+              </div>
               
               <FormField
                 control={form.control}
@@ -301,9 +315,14 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
               />
             </div>
 
-            {/* Diet Preferences */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">Diet Preferences</h3>
+            <Separator className="my-8" />
+
+            {/* Diet Preferences Section */}
+            <div className="space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">4</div>
+                <h3 className="text-xl font-semibold text-foreground">Diet Preferences</h3>
+              </div>
               
               <FormField
                 control={form.control}
@@ -367,9 +386,13 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
               />
             </div>
 
-            <Button type="submit" size="xl" className="w-full">
-              Generate My Personalized Diet Plan
-            </Button>
+            <Separator className="my-8" />
+
+            <div className="pt-4">
+              <Button type="submit" size="xl" className="w-full shadow-lg">
+                Generate My Personalized Diet Plan
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

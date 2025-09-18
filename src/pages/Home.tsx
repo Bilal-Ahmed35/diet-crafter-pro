@@ -195,7 +195,12 @@ export default function Home() {
                 <Button size="xl" onClick={handleGetStarted} className="w-full sm:w-auto">
                   Create My Plan
                 </Button>
-                <Button variant="outline" size="xl" className="w-full sm:w-auto">
+                <Button 
+                  variant="outline" 
+                  size="xl" 
+                  className="w-full sm:w-auto"
+                  onClick={() => document.getElementById('diet-plans')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   Learn More
                 </Button>
               </div>
@@ -233,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* Diet Plans Section */}
-      <section className="py-20 bg-muted/30">
+      <section id="diet-plans" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
