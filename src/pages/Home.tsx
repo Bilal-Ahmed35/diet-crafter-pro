@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { DietPlanCard } from "@/components/DietPlanCard";
 import { DietDetailModal } from "@/components/DietDetailModal";
+import { NavDropdowns } from "@/components/NavDropdowns";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroImage from "@/assets/hero-diet-image.jpg";
 
 const dietPlans = [
@@ -142,11 +144,31 @@ const dietPlans = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const { region, t } = useLanguage();
   const [selectedDiet, setSelectedDiet] = useState<typeof dietPlans[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Filter diet plans based on selected region
+  const filteredDietPlans = useMemo(() => {
+    if (region === 'international') return dietPlans;
+    
+    return dietPlans.filter(plan => {
+      // Map diet plans to regions
+      const planRegions: { [key: string]: string[] } = {
+        'balanced': ['international', 'north_america', 'europe', 'australia_oceania'],
+        'mediterranean': ['europe', 'middle_east'],
+        'south_asia': ['south_asia'],
+        'east_asia': ['east_asia'],
+        'plant_based': ['international', 'north_america', 'europe', 'latin_america'],
+        'high_protein': ['international', 'north_america', 'europe', 'australia_oceania']
+      };
+      
+      return planRegions[plan.id]?.includes(region) || false;
+    });
+  }, [region]);
+
   const handlePlanSelect = (dietId: string) => {
-    const diet = dietPlans.find(plan => plan.id === dietId);
+    const diet = filteredDietPlans.find(plan => plan.id === dietId);
     if (diet) {
       setSelectedDiet(diet);
       setIsModalOpen(true);
@@ -167,9 +189,12 @@ export default function Home() {
               <div className="w-8 h-8 bg-gradient-to-r from-primary to-primary-dark rounded-lg"></div>
               <span className="text-xl font-bold text-foreground">NutriPlan</span>
             </div>
-            <Button variant="outline" onClick={handleGetStarted}>
-              Get Started
-            </Button>
+            <div className="flex items-center space-x-4">
+              <NavDropdowns />
+              <Button variant="outline" onClick={handleGetStarted}>
+                {t('nav.getStarted')}
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -181,19 +206,16 @@ export default function Home() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                  Your Perfect
-                  <span className="block text-primary">Diet Plan</span>
-                  Awaits
+                  {t('hero.title')}
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                  Get a personalized nutrition plan tailored to your goals, lifestyle, and preferences. 
-                  Science-backed recommendations for sustainable results.
+                  {t('hero.subtitle')}
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="xl" onClick={handleGetStarted} className="w-full sm:w-auto">
-                  Create My Plan
+                  {t('hero.createPlan')}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -201,22 +223,22 @@ export default function Home() {
                   className="w-full sm:w-auto"
                   onClick={() => document.getElementById('diet-plans')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Learn More
+                  {t('hero.learnMore')}
                 </Button>
               </div>
 
               <div className="flex items-center space-x-8 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-success rounded-full"></div>
-                  <span>Science-Based</span>
+                  <span>{t('hero.scienceBased')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-success rounded-full"></div>
-                  <span>Personalized</span>
+                  <span>{t('hero.personalized')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-success rounded-full"></div>
-                  <span>Easy to Follow</span>
+                  <span>{t('hero.easyToFollow')}</span>
                 </div>
               </div>
             </div>
@@ -230,7 +252,7 @@ export default function Home() {
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground px-6 py-3 rounded-lg shadow-lg">
-                <div className="text-sm font-medium">1000+ Success Stories</div>
+                <div className="text-sm font-medium">1000+ {t('hero.successStories')}</div>
               </div>
             </div>
           </div>
@@ -242,15 +264,15 @@ export default function Home() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Choose Your Preferred Diet Style
+              {t('plans.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Each plan is scientifically designed and can be personalized to match your specific needs and goals.
+              {t('plans.subtitle')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {dietPlans.map((plan) => (
+            {filteredDietPlans.map((plan) => (
               <DietPlanCard
                 key={plan.id}
                 title={plan.title}
@@ -270,13 +292,13 @@ export default function Home() {
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-              Ready to Transform Your Health?
+              {t('cta.title')}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Join thousands who have achieved their health goals with our personalized diet plans.
+              {t('cta.subtitle')}
             </p>
             <Button size="xl" onClick={handleGetStarted} className="px-12">
-              Start Your Journey
+              {t('cta.start')}
             </Button>
           </div>
         </div>
@@ -290,7 +312,7 @@ export default function Home() {
             <span className="text-lg font-bold text-foreground">NutriPlan</span>
           </div>
           <p className="text-muted-foreground">
-            © 2024 NutriPlan. Your personalized path to better health.
+            © 2024 NutriPlan. {t('footer.tagline')}
           </p>
         </div>
       </footer>

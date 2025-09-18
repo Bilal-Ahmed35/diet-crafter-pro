@@ -4,6 +4,7 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Form,
   FormControl,
@@ -41,6 +42,7 @@ interface PersonalizationFormProps {
 }
 
 export const PersonalizationForm = ({ onSubmit, selectedDietType }: PersonalizationFormProps) => {
+  const { t } = useLanguage();
   const form = useForm<PersonalizationData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,9 +66,9 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg border-0">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl text-foreground">Personalize Your Diet Plan</CardTitle>
+        <CardTitle className="text-3xl text-foreground">{t('form.title')}</CardTitle>
         <CardDescription className="text-lg text-muted-foreground">
-          Tell us about yourself to get a customized meal plan
+          {t('form.subtitle')}
         </CardDescription>
       </CardHeader>
 
@@ -77,7 +79,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">1</div>
-                <h3 className="text-xl font-semibold text-foreground">Basic Information</h3>
+                <h3 className="text-xl font-semibold text-foreground">{t('form.basicInfo')}</h3>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -86,7 +88,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                   name="age"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Age</FormLabel>
+                      <FormLabel>{t('form.age')}</FormLabel>
                       <FormControl>
                         <Input placeholder="25" type="number" {...field} />
                       </FormControl>
@@ -100,7 +102,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                   name="gender"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Gender</FormLabel>
+                      <FormLabel>{t('form.gender')}</FormLabel>
                       <FormControl>
                         <RadioGroup
                           onValueChange={field.onChange}
@@ -109,11 +111,11 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                         >
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="male" id="male" />
-                            <label htmlFor="male">Male</label>
+                            <label htmlFor="male">{t('form.male')}</label>
                           </div>
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="female" id="female" />
-                            <label htmlFor="female">Female</label>
+                            <label htmlFor="female">{t('form.female')}</label>
                           </div>
                         </RadioGroup>
                       </FormControl>
@@ -129,7 +131,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 name="heightUnit"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Height Unit</FormLabel>
+                    <FormLabel>{t('form.heightUnit')}</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -158,7 +160,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                     name="height"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Height (cm)</FormLabel>
+                        <FormLabel>{t('form.height')} (cm)</FormLabel>
                         <FormControl>
                           <Input placeholder="170" type="number" {...field} />
                         </FormControl>
@@ -168,7 +170,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                   />
                 ) : (
                   <div className="space-y-4">
-                    <FormLabel>Height (Feet & Inches)</FormLabel>
+                    <FormLabel>{t('form.height')} (Feet & Inches)</FormLabel>
                     <div className="grid grid-cols-2 gap-2">
                       <FormField
                         control={form.control}
@@ -205,7 +207,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                   name="weight"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Weight (kg)</FormLabel>
+                      <FormLabel>{t('form.weight')} (kg)</FormLabel>
                       <FormControl>
                         <Input placeholder="70" type="number" {...field} />
                       </FormControl>
@@ -222,7 +224,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">2</div>
-                <h3 className="text-xl font-semibold text-foreground">Regional Preferences</h3>
+                <h3 className="text-xl font-semibold text-foreground">{t('form.regionalPrefs')}</h3>
               </div>
               
               <FormField
@@ -230,7 +232,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 name="region"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Region/Cuisine Preference</FormLabel>
+                    <FormLabel>{t('form.region')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -262,7 +264,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">3</div>
-                <h3 className="text-xl font-semibold text-foreground">Activity & Goals</h3>
+                <h3 className="text-xl font-semibold text-foreground">{t('form.activityGoals')}</h3>
               </div>
               
               <FormField
@@ -270,7 +272,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 name="activityLevel"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Activity Level</FormLabel>
+                    <FormLabel>{t('form.activityLevel')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -295,7 +297,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 name="fitnessGoal"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Fitness Goal</FormLabel>
+                    <FormLabel>{t('form.fitnessGoal')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -321,7 +323,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-sm font-bold">4</div>
-                <h3 className="text-xl font-semibold text-foreground">Diet Preferences</h3>
+                <h3 className="text-xl font-semibold text-foreground">{t('form.dietPrefs')}</h3>
               </div>
               
               <FormField
@@ -329,7 +331,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 name="dietType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Diet Type</FormLabel>
+                    <FormLabel>{t('form.dietType')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -369,7 +371,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
                 name="allergies"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Allergies & Intolerances</FormLabel>
+                    <FormLabel>{t('form.allergies')}</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="e.g., peanuts, dairy, gluten, shellfish..."
@@ -390,7 +392,7 @@ export const PersonalizationForm = ({ onSubmit, selectedDietType }: Personalizat
 
             <div className="pt-4">
               <Button type="submit" size="xl" className="w-full shadow-lg">
-                Generate My Personalized Diet Plan
+                {t('form.generate')}
               </Button>
             </div>
           </form>
