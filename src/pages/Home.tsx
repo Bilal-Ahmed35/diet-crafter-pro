@@ -139,6 +139,138 @@ const dietPlans = [
       healthBenefits: ["Supports muscle growth and repair", "Increases metabolic rate", "Improves satiety and weight management", "Maintains bone health", "Supports immune function"],
       tips: ["Eat protein within 30 minutes post-workout", "Aim for 20-30g protein per meal", "Include variety in protein sources", "Stay hydrated during training", "Don't skip carbohydrates entirely"]
     }
+  },
+  {
+    id: "keto",
+    title: "Ketogenic Low Carb",
+    description: "High-fat, low-carbohydrate diet designed to promote ketosis for weight loss and metabolic health.",
+    benefits: ["Weight Loss", "Mental Clarity", "Blood Sugar Control"],
+    calories: "1200-1800 calories",
+    imageUrl: "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&h=600&fit=crop",
+    detailedInfo: {
+      overview: "The Ketogenic diet is a very low-carb, high-fat diet that shares similarities with Atkins and low-carb diets. It involves drastically reducing carbohydrate intake and replacing it with fat, putting your body into ketosis.",
+      mealStructure: ["70-75% fat", "20-25% protein", "5-10% carbohydrates", "Intermittent fasting optional"],
+      restrictions: ["Very low carbs (<20g/day)", "No grains or sugars", "Limited fruits", "No starchy vegetables"],
+      nutritionFocus: ["Healthy fats priority", "Adequate protein", "Minimal carbohydrates", "Electrolyte balance"],
+      sampleMeals: {
+        breakfast: ["Avocado and eggs", "Keto coffee with MCT oil", "Cheese and bacon omelet", "Coconut yogurt with nuts"],
+        lunch: ["Salmon salad with olive oil", "Chicken thighs with vegetables", "Bunless burger with cheese", "Tuna and avocado wrap"],
+        dinner: ["Ribeye steak with butter", "Pork chops with cauliflower", "Salmon with asparagus", "Chicken curry with coconut"],
+        snacks: ["Macadamia nuts", "Cheese cubes", "Pork rinds", "Avocado with salt"]
+      },
+      healthBenefits: ["Rapid weight loss", "Improved insulin sensitivity", "Enhanced mental focus", "Reduced inflammation", "Better appetite control"],
+      tips: ["Track your macros carefully", "Stay hydrated and supplement electrolytes", "Ease into the diet gradually", "Focus on whole foods", "Monitor ketone levels"]
+    }
+  },
+  {
+    id: "intermittent_fasting",
+    title: "Intermittent Fasting",
+    description: "Time-restricted eating pattern combining various global cuisines for optimal health and longevity.",
+    benefits: ["Weight Management", "Longevity", "Metabolic Health"],
+    calories: "1400-2000 calories",
+    imageUrl: "https://images.unsplash.com/photo-1495521821757-a2efacb8b494?w=800&h=600&fit=crop",
+    detailedInfo: {
+      overview: "Intermittent Fasting is an eating pattern that cycles between periods of fasting and eating. It focuses on when you eat rather than what you eat, incorporating diverse global cuisines during eating windows.",
+      mealStructure: ["16:8 or 18:6 fasting", "2-3 meals during eating window", "No snacking during fast", "Hydration focus during fasting"],
+      restrictions: ["Time-restricted eating", "No calories during fasting", "Limited eating window", "Consistent schedule important"],
+      nutritionFocus: ["Nutrient-dense meals", "Balanced macronutrients", "Adequate protein", "Whole foods emphasis"],
+      sampleMeals: {
+        breakfast: ["Break fast with fruits", "Protein smoothie bowl", "Eggs with vegetables", "Greek yogurt parfait"],
+        lunch: ["Mediterranean bowl", "Asian stir-fry", "Mexican burrito bowl", "Indian dal with rice"],
+        dinner: ["Grilled protein with vegetables", "Italian pasta with lean meat", "Thai curry with brown rice", "American balanced plate"],
+        snacks: ["Only during eating window", "Nuts and fruits", "Vegetable sticks", "Herbal teas during fasting"]
+      },
+      healthBenefits: ["Weight loss and maintenance", "Improved insulin sensitivity", "Enhanced autophagy", "Better heart health", "Increased longevity"],
+      tips: ["Start with 12:12 and progress gradually", "Stay hydrated during fasting", "Choose nutrient-dense foods", "Listen to your body", "Maintain consistent schedule"]
+    }
+  },
+  {
+    id: "nordic",
+    title: "Nordic Wellness",
+    description: "Scandinavian-inspired diet emphasizing seasonal, local ingredients and traditional preparation methods.",
+    benefits: ["Seasonal Eating", "Sustainability", "Heart Health"],
+    calories: "1500-2100 calories",
+    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=600&fit=crop",
+    detailedInfo: {
+      overview: "The Nordic diet is based on traditional foods from Denmark, Finland, Iceland, Norway, and Sweden. It emphasizes seasonal, sustainable, and locally-sourced ingredients with minimal processing.",
+      mealStructure: ["Seasonal ingredients", "Fatty fish twice weekly", "Whole grains daily", "Root vegetables emphasis"],
+      restrictions: ["Limited processed foods", "Minimal added sugars", "Local/seasonal focus", "Sustainable sourcing"],
+      nutritionFocus: ["Omega-3 fatty acids", "High fiber content", "Antioxidant-rich berries", "Complex carbohydrates"],
+      sampleMeals: {
+        breakfast: ["Rye bread with herring", "Oatmeal with lingonberries", "Skyr with nuts and seeds", "Whole grain porridge"],
+        lunch: ["Salmon with dill potatoes", "Vegetable soup with rye bread", "Pickled vegetables with fish", "Root vegetable stew"],
+        dinner: ["Mackerel with barley", "Venison with juniper berries", "Cabbage rolls with lean meat", "Fish stew with vegetables"],
+        snacks: ["Cloudberries and nuts", "Rye crackers with cheese", "Herbal teas", "Seasonal berries"]
+      },
+      healthBenefits: ["Reduced inflammation", "Lower cholesterol levels", "Better blood pressure", "Enhanced cognitive function", "Sustainable weight management"],
+      tips: ["Focus on seasonal produce", "Include fish regularly", "Choose whole grains", "Limit processed foods", "Embrace fermented foods"]
+    }
+  },
+  {
+    id: "dash",
+    title: "DASH Heart Healthy",
+    description: "Dietary approach specifically designed to prevent and control hypertension through balanced nutrition.",
+    benefits: ["Blood Pressure", "Heart Health", "Stroke Prevention"],
+    calories: "1600-2300 calories",
+    imageUrl: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&h=600&fit=crop",
+    detailedInfo: {
+      overview: "DASH (Dietary Approaches to Stop Hypertension) is a scientifically-proven eating plan designed to help treat or prevent high blood pressure. It emphasizes whole foods while limiting sodium, saturated fat, and added sugars.",
+      mealStructure: ["Low sodium (<2300mg)", "High potassium foods", "Lean proteins", "Whole grains emphasis"],
+      restrictions: ["Limited sodium", "Reduced saturated fat", "Minimal processed foods", "Limited sweets and alcohol"],
+      nutritionFocus: ["Potassium-rich foods", "Magnesium and calcium", "Fiber emphasis", "Lean protein sources"],
+      sampleMeals: {
+        breakfast: ["Oatmeal with banana and berries", "Low-fat yogurt with granola", "Whole grain toast with avocado", "Smoothie with spinach and fruit"],
+        lunch: ["Grilled chicken salad", "Lentil soup with vegetables", "Turkey sandwich on whole grain", "Quinoa bowl with vegetables"],
+        dinner: ["Baked salmon with sweet potato", "Lean beef with steamed broccoli", "Chicken stir-fry with brown rice", "Bean and vegetable chili"],
+        snacks: ["Fresh fruits", "Unsalted nuts", "Low-fat cheese", "Vegetable sticks with hummus"]
+      },
+      healthBenefits: ["Lowers blood pressure", "Reduces heart disease risk", "Improves cholesterol levels", "Supports kidney health", "Aids weight management"],
+      tips: ["Read nutrition labels for sodium", "Use herbs and spices instead of salt", "Choose fresh over processed", "Include potassium-rich foods", "Stay consistent with the plan"]
+    }
+  },
+  {
+    id: "paleo",
+    title: "Global Paleo",
+    description: "Ancestral eating approach using whole foods from various cultures, avoiding processed ingredients.",
+    benefits: ["Natural Foods", "Inflammation Reduction", "Energy Boost"],
+    calories: "1500-2200 calories",
+    imageUrl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop",
+    detailedInfo: {
+      overview: "The Paleo diet is based on foods that were available to our hunter-gatherer ancestors. It includes whole foods while eliminating grains, legumes, dairy, and processed foods, adapted with flavors from around the world.",
+      mealStructure: ["Grass-fed meats", "Wild-caught fish", "Organic vegetables", "Seasonal fruits"],
+      restrictions: ["No grains", "No legumes", "No dairy", "No processed foods"],
+      nutritionFocus: ["High-quality proteins", "Healthy fats", "Nutrient-dense vegetables", "Natural sugars only"],
+      sampleMeals: {
+        breakfast: ["Scrambled eggs with vegetables", "Coconut flour pancakes", "Smoked salmon with avocado", "Fruit and nut bowl"],
+        lunch: ["Grilled chicken with sweet potato", "Tuna salad with olive oil", "Beef stir-fry with vegetables", "Zucchini noodles with meat sauce"],
+        dinner: ["Grass-fed steak with asparagus", "Baked cod with roasted vegetables", "Pork tenderloin with Brussels sprouts", "Lamb chops with cauliflower"],
+        snacks: ["Mixed nuts and berries", "Hard-boiled eggs", "Coconut chips", "Apple with almond butter"]
+      },
+      healthBenefits: ["Reduced inflammation", "Improved digestion", "Better blood sugar control", "Increased energy levels", "Weight loss support"],
+      tips: ["Focus on food quality", "Include variety in vegetables", "Choose grass-fed and wild-caught", "Listen to your body", "Stay hydrated"]
+    }
+  },
+  {
+    id: "latin_american",
+    title: "Latin American Heritage",
+    description: "Traditional Latin American nutrition emphasizing beans, grains, tropical fruits, and vibrant spices.",
+    benefits: ["Rich Flavors", "Plant Proteins", "Cultural Heritage"],
+    calories: "1400-2000 calories",
+    imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&h=600&fit=crop",
+    detailedInfo: {
+      overview: "Latin American Heritage diet celebrates the rich culinary traditions of Central and South America, emphasizing indigenous ingredients like beans, corn, quinoa, and tropical fruits combined with Spanish and Portuguese influences.",
+      mealStructure: ["Beans and rice combinations", "Tropical fruits daily", "Fresh herbs and spices", "Corn-based foods"],
+      restrictions: ["Minimal processed foods", "Fresh ingredients focus", "Traditional preparation methods", "Seasonal eating"],
+      nutritionFocus: ["Plant-based proteins", "Complex carbohydrates", "Antioxidant-rich fruits", "Anti-inflammatory spices"],
+      sampleMeals: {
+        breakfast: ["Gallo pinto with eggs", "Arepa with cheese", "Tropical fruit bowl", "Quinoa breakfast bowl"],
+        lunch: ["Black beans and rice", "Ceviche with sweet potato", "Empanadas with salad", "Pozole with vegetables"],
+        dinner: ["Grilled fish with plantains", "Chicken with mole sauce", "Quinoa stuffed peppers", "Brazilian feijoada"],
+        snacks: ["Fresh tropical fruits", "Roasted plantain chips", "Coconut water", "Mixed nuts with chili"]
+      },
+      healthBenefits: ["High in fiber and plant proteins", "Rich in antioxidants", "Supports digestive health", "Anti-inflammatory properties", "Promotes heart health"],
+      tips: ["Use fresh herbs liberally", "Include beans in most meals", "Choose tropical fruits for vitamins", "Use lime and citrus often", "Embrace traditional cooking methods"]
+    }
   }
 ];
 
@@ -160,7 +292,13 @@ export default function Home() {
         'south_asia': ['south_asia'],
         'east_asia': ['east_asia'],
         'plant_based': ['international', 'north_america', 'europe', 'latin_america'],
-        'high_protein': ['international', 'north_america', 'europe', 'australia_oceania']
+        'high_protein': ['international', 'north_america', 'europe', 'australia_oceania'],
+        'keto': ['international', 'north_america', 'europe', 'australia_oceania'],
+        'intermittent_fasting': ['international', 'north_america', 'europe', 'east_asia'],
+        'nordic': ['europe'],
+        'dash': ['international', 'north_america'],
+        'paleo': ['international', 'north_america', 'australia_oceania'],
+        'latin_american': ['latin_america']
       };
       
       return planRegions[plan.id]?.includes(region) || false;
