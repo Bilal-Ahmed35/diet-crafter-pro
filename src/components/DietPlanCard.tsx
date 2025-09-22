@@ -20,12 +20,15 @@ export const DietPlanCard = ({
   onSelect 
 }: DietPlanCardProps) => {
   return (
-    <Card className="h-full hover:shadow-lg transition-all duration-200 border-0 shadow-md bg-card">
+    <Card 
+      className="h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border-0 shadow-md bg-card cursor-pointer group"
+      onClick={onSelect}
+    >
       <div className="aspect-video overflow-hidden rounded-t-lg">
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
       </div>
       
@@ -61,8 +64,11 @@ export const DietPlanCard = ({
           </div>
           
           <Button 
-            onClick={onSelect}
-            className="w-full"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect();
+            }}
+            className="w-full group-hover:bg-primary-dark group-hover:shadow-lg transition-all duration-300"
             size="lg"
           >
             Get Personalized Plan
