@@ -6,6 +6,7 @@ import { RecipeModal } from "@/components/RecipeModal";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, RefreshCw, Loader2, Printer } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslatedArray } from "@/hooks/useTranslatedContent";
 
 interface Recipe {
   id: number;
@@ -47,6 +48,13 @@ export default function Results() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Translate meal plans content
+  const { translatedItems: translatedMealPlans, isLoading: isTranslating } = useTranslatedArray(
+    mealPlans,
+    ['title', 'meals.breakfast.title', 'meals.lunch.title', 'meals.dinner.title', 'meals.snack.title'],
+    { sourceLang: 'en', enabled: true }
+  );
 
   // Mock meal plans for demonstration (in real app, this would come from Spoonacular API)
   const generateMockMealPlans = (): MealPlan[] => {
@@ -394,9 +402,9 @@ export default function Results() {
           )}
 
           {/* Meal Plans Grid */}
-          {!isLoading && !error && mealPlans.length > 0 && (
+          {!isLoading && !error && translatedMealPlans.length > 0 && (
             <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {mealPlans.map((plan) => (
+              {translatedMealPlans.map((plan) => (
                 <MealPlanCard
                   key={plan.id}
                   title={plan.title}

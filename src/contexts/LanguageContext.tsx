@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import translationService from '@/hooks/useLibreTranslate';
 
 // Translation resources
 const resources = {
@@ -177,6 +178,8 @@ export interface LanguageContextType {
   setLanguage: (lang: string) => void;
   setRegion: (region: string) => void;
   t: (key: string) => string;
+  translateDynamic: (text: string, sourceLang?: string) => Promise<string>;
+  clearTranslationCache: () => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -208,6 +211,14 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return i18n.t(key);
   };
 
+  const translateDynamic = async (text: string, sourceLang: string = 'en'): Promise<string> => {
+    return translationService.translateText(text, sourceLang, language);
+  };
+
+  const clearTranslationCache = () => {
+    translationService.clearCache();
+  };
+
   useEffect(() => {
     const savedLanguage = localStorage.getItem('preferredLanguage');
     const savedRegion = localStorage.getItem('preferredRegion');
@@ -221,7 +232,15 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   return (
-    <LanguageContext.Provider value={{ language, region, setLanguage, setRegion, t }}>
+    <LanguageContext.Provider value={{ 
+      language, 
+      region, 
+      setLanguage, 
+      setRegion, 
+      t, 
+      translateDynamic, 
+      clearTranslationCache 
+    }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -5,6 +5,7 @@ import { DietPlanCard } from "@/components/DietPlanCard";
 import { DietDetailModal } from "@/components/DietDetailModal";
 import { NavDropdowns } from "@/components/NavDropdowns";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslatedArray } from "@/hooks/useTranslatedContent";
 import heroImage from "@/assets/hero-diet-image.jpg";
 
 const dietPlans = [
@@ -280,11 +281,19 @@ export default function Home() {
   const [selectedDiet, setSelectedDiet] = useState<typeof dietPlans[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Translate diet plans content
+  const { translatedItems: translatedDietPlans, isLoading: isTranslating } = useTranslatedArray(
+    dietPlans,
+    ['title', 'description', 'benefits', 'detailedInfo.overview', 'detailedInfo.restrictions', 
+     'detailedInfo.nutritionFocus', 'detailedInfo.healthBenefits', 'detailedInfo.tips'],
+    { sourceLang: 'en', enabled: true }
+  );
+
   // Filter diet plans based on selected region
   const filteredDietPlans = useMemo(() => {
-    if (region === 'international') return dietPlans;
+    if (region === 'international') return translatedDietPlans;
     
-    return dietPlans.filter(plan => {
+    return translatedDietPlans.filter(plan => {
       // Map diet plans to regions
       const planRegions: { [key: string]: string[] } = {
         'balanced': ['international', 'north_america', 'europe', 'australia_oceania'],
@@ -303,7 +312,7 @@ export default function Home() {
       
       return planRegions[plan.id]?.includes(region) || false;
     });
-  }, [region]);
+  }, [region, translatedDietPlans]);
 
   const handlePlanSelect = (dietId: string) => {
     const diet = filteredDietPlans.find(plan => plan.id === dietId);
