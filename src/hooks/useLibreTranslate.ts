@@ -18,7 +18,11 @@ class TranslationService {
   private cache: TranslationCache = {};
   private pendingRequests: Map<string, Promise<string>> = new Map();
   private readonly CACHE_EXPIRY = 24 * 60 * 60 * 1000; // 24 hours
-  private readonly API_ENDPOINT = 'https://libretranslate.de/translate';
+  private readonly API_ENDPOINTS = [
+    'https://libretranslate.com/translate',
+    'https://translate.terraprint.co/translate',
+    'https://libretranslate.de/translate'
+  ];
 
   private getCacheKey(text: string, sourceLang: string, targetLang: string): string {
     return `${sourceLang}:${targetLang}:${text}`;
@@ -83,25 +87,39 @@ class TranslationService {
     sourceLang: string, 
     targetLang: string
   ): Promise<string> {
-    const response = await fetch(this.API_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        q: text,
-        source: sourceLang,
-        target: targetLang,
-        format: 'text'
-      }),
-    });
+    let lastError: Error | null = null;
 
-    if (!response.ok) {
-      throw new Error(`Translation API error: ${response.status}`);
+    // Try each API endpoint
+    for (const endpoint of this.API_ENDPOINTS) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            q: text,
+            source: sourceLang,
+            target: targetLang,
+            format: 'text'
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Translation API error: ${response.status}`);
+        }
+
+        const data: LibreTranslateResponse = await response.json();
+        return data.translatedText || text;
+      } catch (error) {
+        lastError = error as Error;
+        console.warn(`Translation endpoint ${endpoint} failed:`, error);
+        continue;
+      }
     }
 
-    const data: LibreTranslateResponse = await response.json();
-    return data.translatedText || text;
+    // If all endpoints fail, throw the last error
+    throw lastError || new Error('All translation endpoints failed');
   }
 
   async translateBatch(
